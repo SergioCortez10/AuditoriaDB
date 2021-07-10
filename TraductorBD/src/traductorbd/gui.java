@@ -25,11 +25,16 @@ public class gui extends javax.swing.JFrame {
     String bd ="";
     String tabla = "";
     ArrayList<String>columnas = new ArrayList<String>();
+    ArrayList<String>tipo = new ArrayList<String>();
+    ArrayList<String>columnas2 = new ArrayList<String>();
+    ArrayList<String>tipo2 = new ArrayList<String>();
+    ArrayList<String>tablas = new ArrayList<String>();
     
     
     public gui() {
         initComponents();
         cargarBases();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -41,10 +46,14 @@ public class gui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         btmLimpiar = new javax.swing.JButton();
         cmbDataBase = new javax.swing.JComboBox<>();
         cmbTablas = new javax.swing.JComboBox<>();
@@ -52,6 +61,19 @@ public class gui extends javax.swing.JFrame {
         txtXML = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
+        btnSalir = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtTablas = new javax.swing.JTextArea();
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
+        jCheckBoxMenuItem2.setSelected(true);
+        jCheckBoxMenuItem2.setText("jCheckBoxMenuItem2");
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,9 +81,12 @@ public class gui extends javax.swing.JFrame {
 
         jLabel2.setText("Tablas");
 
-        jButton1.setText("Crear tabla auditora");
-
-        jButton2.setText("Crear Trigger");
+        jButton1.setText("Generar auditoria");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btmLimpiar.setText("Limpiar");
         btmLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -70,14 +95,12 @@ public class gui extends javax.swing.JFrame {
             }
         });
 
-        cmbDataBase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbDataBase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbDataBaseActionPerformed(evt);
             }
         });
 
-        cmbTablas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbTablas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbTablasActionPerformed(evt);
@@ -85,6 +108,7 @@ public class gui extends javax.swing.JFrame {
         });
 
         txtXML.setColumns(20);
+        txtXML.setFont(new java.awt.Font("Leelawadee", 0, 13)); // NOI18N
         txtXML.setRows(5);
         jScrollPane2.setViewportView(txtXML);
 
@@ -101,30 +125,46 @@ public class gui extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblDatos);
 
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
+        txtTablas.setColumns(20);
+        txtTablas.setFont(new java.awt.Font("Leelawadee UI", 0, 14)); // NOI18N
+        txtTablas.setRows(5);
+        jScrollPane3.setViewportView(txtTablas);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(cmbDataBase, 0, 159, Short.MAX_VALUE)
-                            .addComponent(cmbTablas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(45, 45, 45)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addGap(27, 27, 27)
-                            .addComponent(jButton2)
-                            .addGap(40, 40, 40)
-                            .addComponent(btmLimpiar))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                            .addComponent(cmbTablas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(594, 594, 594)
+                        .addComponent(btmLimpiar)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnSalir))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,14 +180,17 @@ public class gui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbTablas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSalir)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(btmLimpiar)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btmLimpiar)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                .addGap(24, 24, 24))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -155,6 +198,8 @@ public class gui extends javax.swing.JFrame {
 
     private void btmLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmLimpiarActionPerformed
         txtXML.setText("");
+        txtTablas.setText("");
+        tablas.clear();
     }//GEN-LAST:event_btmLimpiarActionPerformed
 
     private void cmbDataBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDataBaseActionPerformed
@@ -178,7 +223,7 @@ public class gui extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbDataBaseActionPerformed
 
     private void cmbTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTablasActionPerformed
-        if(cmbTablas.getItemCount()>0){
+       if(cmbTablas.getItemCount()>0){
             DefaultTableModel model = new DefaultTableModel();
             try{
                 tabla = cmbTablas.getSelectedItem().toString();
@@ -187,13 +232,16 @@ public class gui extends javax.swing.JFrame {
                 st4.execute("use " + bd);
                 ResultSet rs3 = st4.executeQuery(c3);
                 columnas.clear();
+                //tipo.clear();
+                
                 while(rs3.next()){
                     model.addColumn(rs3.getString("Field"));
                     columnas.add(rs3.getString("Field"));
+                    tipo.add(rs3.getString("Type"));
                 }
                 int col=model.getColumnCount();
                 System.out.println("Numero decolumnas " + col);
-                String c4 = "Select * from" + tabla;
+                String c4 = "SELECT * FROM " + tabla;
                 ResultSet rs4 = st4.executeQuery(c4);
                 while(rs4.next()){
                     Object objeto[]= new Object[col];
@@ -208,6 +256,80 @@ public class gui extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_cmbTablasActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+            tablas.add(tabla);            
+            String tab = "";
+            String tab2="";
+            String ins="",uno="",dos="";
+            String mod="";
+            String del="",tres="",cuatro="";
+            
+            tab2 +="Tablas selecionadas: \n";
+ 
+            for(int i = 0; i < tablas.size(); i++) {
+                String audi="";
+                tab2+=tablas.get(i)+"\n";
+                String c10 = "desc " + tablas.get(i);
+                Statement st10 = c.conectar().createStatement();
+                st10.execute("use " + bd);
+                ResultSet rs10 = st10.executeQuery(c10);
+                
+                
+                tab+="create table "+tablas.get(i)+"_auditora(\n";
+                tab+="id_audi int not null auto_increment primary key,\n";
+                
+                ins+="create trigger insertar"+tablas.get(i)+" after insert\n";
+                ins+="on " + tablas.get(i) + "\n";
+                ins+="for each row \n";
+                ins+= "insert into "+tablas.get(i)+"_auditora (";
+                
+                mod+="create trigger modificar"+tablas.get(i)+" after update\n";
+                mod+="on " + tablas.get(i) + "\n";
+                mod+="for each row \n";
+                mod+= "insert into "+tablas.get(i)+"_auditora (";
+                
+                del+="create trigger eliminar"+tablas.get(i)+" after delete\n";
+                del+="on " + tablas.get(i) + "\n";
+                del+="for each row \n";
+                del+= "insert into "+tablas.get(i)+"_auditora (";
+                
+                int j = 0;
+                int y = 0;
+                columnas2.clear();
+                tipo2.clear();
+                while(rs10.next()){
+                    columnas2.add(rs10.getString("Field"));
+                    tipo2.add(rs10.getString("Type"));
+                    tab+=columnas2.get(j)+" "+tipo2.get(y)+",\n";
+                    uno+=columnas2.get(j)+",";
+                    dos+="new."+columnas2.get(j)+",";
+                    tres+=columnas2.get(j)+",";
+                    cuatro+="old."+columnas2.get(j)+",";
+                    j=j+1;
+                    y=y+1;
+                }
+            tab+="fecha time,\n";tab+="actividad varchar(30),\n";tab+="usuario varchar(30));\n"+"\n";
+            
+            ins+=uno+"fecha,usuario,actividad)\n";ins+="value("+dos;ins+="now(),user(),'Inserto');\n"+"\n";
+            mod+=uno+"fecha,usuario,actividad)\n";mod+="value("+dos;mod+="now(),user(),'Modifico');\n"+"\n";
+            del+=tres+"fecha,usuario,actividad)\n";del+="value("+cuatro;del+="now(),user(),'Elimino');\n";
+            
+            audi+=tab+ins+mod+del+"\n";
+            txtXML.setText(audi);
+            txtTablas.setText(tab2);
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+       login salir = new login();
+       salir.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     public void cargarBases(){
         try{
@@ -257,15 +379,27 @@ public class gui extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btmLimpiar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbDataBase;
     private javax.swing.JComboBox<String> cmbTablas;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblDatos;
+    private javax.swing.JTextArea txtTablas;
     private javax.swing.JTextArea txtXML;
     // End of variables declaration//GEN-END:variables
 }
+
+//Select  * from information_schema.columns WHERE TABLE_NAME='TU_TABLA' AND COLUMN_NAME='TU_COLUMNA'
+//mysql -u root -p
+//show databases;
+//show tables;

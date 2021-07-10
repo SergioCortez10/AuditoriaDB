@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+
 public class Conexion {
     Connection cx;
     String server="jdbc:mysql://localhost:3307/";
