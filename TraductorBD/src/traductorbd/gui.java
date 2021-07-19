@@ -29,6 +29,7 @@ public class gui extends javax.swing.JFrame {
     ArrayList<String>columnas2 = new ArrayList<String>();
     ArrayList<String>tipo2 = new ArrayList<String>();
     ArrayList<String>tablas = new ArrayList<String>();
+     ArrayList<String>audi2 = new ArrayList<String>();
     
     
     public gui() {
@@ -200,6 +201,8 @@ public class gui extends javax.swing.JFrame {
         txtXML.setText("");
         txtTablas.setText("");
         tablas.clear();
+        audi2.clear();
+        tablas.clear();
     }//GEN-LAST:event_btmLimpiarActionPerformed
 
     private void cmbDataBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDataBaseActionPerformed
@@ -232,12 +235,10 @@ public class gui extends javax.swing.JFrame {
                 st4.execute("use " + bd);
                 ResultSet rs3 = st4.executeQuery(c3);
                 columnas.clear();
-                //tipo.clear();
                 
                 while(rs3.next()){
                     model.addColumn(rs3.getString("Field"));
                     columnas.add(rs3.getString("Field"));
-                    tipo.add(rs3.getString("Type"));
                 }
                 int col=model.getColumnCount();
                 System.out.println("Numero decolumnas " + col);
@@ -258,68 +259,82 @@ public class gui extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbTablasActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
         try{
             tablas.add(tabla);            
             String tab = "";
             String tab2="";
-            String ins="",uno="",dos="";
+            String ins="";
+            String uno="";
+            String dos="";
             String mod="";
-            String del="",tres="",cuatro="";
-            
+            String del="";
+            String tres="";
+       
             tab2 +="Tablas selecionadas: \n";
- 
             for(int i = 0; i < tablas.size(); i++) {
-                String audi="";
                 tab2+=tablas.get(i)+"\n";
-                String c10 = "desc " + tablas.get(i);
+            }
+            String audi="";
+                String c10 = "desc " + tabla;
                 Statement st10 = c.conectar().createStatement();
                 st10.execute("use " + bd);
                 ResultSet rs10 = st10.executeQuery(c10);
                 
-                
-                tab+="create table "+tablas.get(i)+"_auditora(\n";
+                String nombretabla = tabla;
+
+                tab+="create table "+nombretabla+"_auditora(\n";
                 tab+="id_audi int not null auto_increment primary key,\n";
                 
-                ins+="create trigger insertar"+tablas.get(i)+" after insert\n";
-                ins+="on " + tablas.get(i) + "\n";
+                ins+="create trigger insertar_"+nombretabla+" after insert\n";
+                ins+="on " + nombretabla + "\n";
                 ins+="for each row \n";
-                ins+= "insert into "+tablas.get(i)+"_auditora (";
+                ins+="insert into "+nombretabla+"_auditora (";
                 
-                mod+="create trigger modificar"+tablas.get(i)+" after update\n";
-                mod+="on " + tablas.get(i) + "\n";
+                mod+="create trigger modificar_"+nombretabla+" after update\n";
+                mod+="on " + nombretabla + "\n";
                 mod+="for each row \n";
-                mod+= "insert into "+tablas.get(i)+"_auditora (";
+                mod+="insert into "+nombretabla+"_auditora (";
                 
-                del+="create trigger eliminar"+tablas.get(i)+" after delete\n";
-                del+="on " + tablas.get(i) + "\n";
+                del+="create trigger eliminar_"+nombretabla+" after delete\n";
+                del+="on " +nombretabla + "\n";
                 del+="for each row \n";
-                del+= "insert into "+tablas.get(i)+"_auditora (";
+                del+="insert into "+nombretabla+"_auditora (";
                 
                 int j = 0;
                 int y = 0;
+                
                 columnas2.clear();
                 tipo2.clear();
-                while(rs10.next()){
+                    while(rs10.next()){
+                    
                     columnas2.add(rs10.getString("Field"));
                     tipo2.add(rs10.getString("Type"));
-                    tab+=columnas2.get(j)+" "+tipo2.get(y)+",\n";
+                    tab+=columnas2.get(j)+" "+tipo2.get(j)+",\n";
                     uno+=columnas2.get(j)+",";
                     dos+="new."+columnas2.get(j)+",";
-                    tres+=columnas2.get(j)+",";
-                    cuatro+="old."+columnas2.get(j)+",";
+                    tres+="old."+columnas2.get(y)+",";
                     j=j+1;
-                    y=y+1;
-                }
-            tab+="fecha time,\n";tab+="actividad varchar(30),\n";tab+="usuario varchar(30));\n"+"\n";
+                    y=y+1;        
+                    }                
+     
+            tab+="fecha timestamp,\n";tab+="actividad varchar(30),\n";tab+="usuario varchar(30));\n"+"\n";
             
             ins+=uno+"fecha,usuario,actividad)\n";ins+="value("+dos;ins+="now(),user(),'Inserto');\n"+"\n";
             mod+=uno+"fecha,usuario,actividad)\n";mod+="value("+dos;mod+="now(),user(),'Modifico');\n"+"\n";
-            del+=tres+"fecha,usuario,actividad)\n";del+="value("+cuatro;del+="now(),user(),'Elimino');\n";
+            del+=uno+"fecha,usuario,actividad)\n";del+="value("+tres;del+="now(),user(),'Elimino');\n"+"\n";
             
             audi+=tab+ins+mod+del+"\n";
+            
             txtXML.setText(audi);
             txtTablas.setText(tab2);
+            audi2.add(audi);            
+            for(int i = 0; i < audi2.size()-1; i++) {
+                audi+=audi2.get(i)+"\n"; 
+                txtXML.setText(audi);
             }
+            
+            
         }catch(SQLException ex){
             ex.printStackTrace();
         }
